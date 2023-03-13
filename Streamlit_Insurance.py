@@ -17,7 +17,7 @@ st.set_page_config(layout="wide")
 
 
 
-mypath = ''
+mypath = '/Users/edwardkaiweihuang/Desktop/DataScience/Insurance Fraud Detection/'
 insurance_data = pd.read_csv(mypath+'insurance_data.csv')
 vendor_data = pd.read_csv(mypath+'vendor_data.csv')
 employee_data = pd.read_csv(mypath+'employee_data.csv')
@@ -67,6 +67,7 @@ if selected=='Data Cleaning':
 if selected=='Exploratory Analysis':
    st.title('Exploratory Analysis')    
    col1,col2=st.columns([3,5])
+   st.markdown('### Interactive Histogram')
    col1.markdown("Select numeric variables to display on histogram and choose a category column for a color.")
    with st.form("Numeric histograms"):
        x_option=col1.selectbox('Select a numeric column for the x axis',numeric_cols,key=1)
@@ -90,6 +91,7 @@ if selected=='Exploratory Analysis':
       #everytime new graph - new name and follow format  
       
    col3,col4=st.columns([3,5])
+   st.markdown('### Interactive Scatter Plot')
    col3.markdown("Select numeric variables to display on scatter and choose a category column for a color.")
             
    with st.form("Numeric Scatter plot"):
@@ -107,6 +109,7 @@ if selected=='Exploratory Analysis':
 
 
    col5,col6=st.columns([3,5])
+   st.markdown('### Interactive Pie-chart')
    col5.markdown("Select numeric variables to display on pie and choose a category column for a color.")
             
    with st.form("Pie Chart"):
@@ -125,7 +128,8 @@ if selected=='Exploratory Analysis':
               
               
               
-   col7,col8=st.columns([3,5])  
+   col7,col8=st.columns([3,5])
+   st.markdown('### Interactive Boxplot')
    col7.markdown("Select numeric variables to display on box and choose a category column for a color.")    
    with st.form("Boxplot"):
           
