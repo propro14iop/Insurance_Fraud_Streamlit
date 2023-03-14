@@ -17,7 +17,7 @@ st.set_page_config(layout="wide")
 
 
 
-mypath = ''
+mypath = '/Users/edwardkaiweihuang/Desktop/DataScience/Insurance Fraud Detection/'
 insurance_data = pd.read_csv(mypath+'insurance_data.csv')
 vendor_data = pd.read_csv(mypath+'vendor_data.csv')
 employee_data = pd.read_csv(mypath+'employee_data.csv')
@@ -42,15 +42,21 @@ with st.sidebar:
     
     
 if selected=='Abstract':
-    st.title('Insurance Fraud')
-    
-    
-    
+    st.title('Introduction to Insurance Fraud')
+    st.markdown('#### By Edward Huang')
+    st.markdown('Insurance fraud is a criminal offense that includes defrauding an insurance company or policyholder for financial advantage. It can manifest itself in a variety of ways, including staged incidents, bogus claims, and exaggeration of damages or injuries. Individuals, groups, and even organized crime rings can perpetrate insurance fraud.')
+    st.markdown('According to fbi.gov, it is estimated that insurance fraud has steals more than 40 Billion USD annually in the United States. Many businesses have gone bankrupt from extreme cases of insurance frauds. Insurance fraud is important to prevent for several reasons. First, it can lead to higher premiums for everyone, as insurance companies pass on the costs of fraudulent claims to their customers. This means that honest policyholders end up paying more for their insurance coverage, which can be a significant financial burden.')
+    st.markdown('In this personal project, I will be using my knowledge on data science to analyze datasets on insurance fraud and its cases, I will search for patterns and run models to try and predict insurance fraud. Hopefully, this can contribute to the effort of battling insurance fraud.')
 
 
 
 if selected=='Background Information':
-    st.title('Background Information')    
+    st.title('Background Information')
+    st.markdown('Insurance fraud is the deliberate act of tricking an insurance company into paying a claim. It is committed by people, businesses, and even networks of organized crime. According to the FBI, insurance fraud is "any act done with the purpose of obtaining a false result from an insurance process."')
+    st.markdown('Insurance fraud may cost insurance companies billions of dollars annually and takes many different forms. Inflating the expense of a claim, fabricating an accident or injury to earn a claim payout, or providing false information on an insurance application are all examples of insurance fraud.')    
+    st.markdown('The expenses incurred in the investigation and prosecution of the case as well as the effect on consumer rates add to the financial damage brought on by insurance fraud. Insurance fraud also damages consumer confidence and the financial stability of individuals who fall victim to it.')
+    st.markdown('Insurance fraud is mostly driven by four factors: greed, retaliation, necessity, and enjoyment, according to the Coalition Against Insurance Fraud. In order to obtain money or other things, those who are motivated by greed will commit fraud. When someone decides to pursue vengeance because they believe an insurer has harmed them, revenge is a possible motivation. When someone is in need and chooses to conduct fraud in order to get money, need is a factor. The excitement of committing insurance fraud is a driving force behind organized criminal networks.')
+    st.markdown('The dataset that I will use and analyze consists of ten thousand cases of insurance fraud. In each case, 38 contributing factors will be provided in the dataset to help us gain more understanding on what is going on in each insurance fraud case. These variables includes the claim amount made by the fraud, marital status, house type, employment status, tenure, age and etc. ')
     
     
     
@@ -121,7 +127,7 @@ if selected=='Exploratory Analysis':
 
 
               
-          submitted3=st.form_submit_button("Submit to view Pie plot")
+          submitted3=st.form_submit_button("Submit to view Pie-plot")
           if submitted3:
               fig3= px.pie(insurance_data, values =x_option2, names= y_option2 ,color= color_option2,hole=0.2 )
               col6.plotly_chart(fig3)               
@@ -146,8 +152,8 @@ if selected=='Exploratory Analysis':
     
 if selected=='Data Analysis':
    st.title('Data Analysis')   
-   col9,col10=st.columns([3,5])
-   col9.markdown('This graph is interesting because it shows that there is no difference between renting and having a mortgage.')
+   col9,col10=st.columns([2,4])
+   col9.markdown('This graph is interesting because it shows that there is no difference between renting and having a mortgage. This is pretty interesting because logically speaking, the more wealthier people would')
    fig6= px.box(insurance_data,x ='CLAIM_AMOUNT', y= 'HOUSE_TYPE' ,color= 'INSURANCE_TYPE' )
    col10.plotly_chart(fig6)   
 
@@ -155,10 +161,25 @@ if selected=='Data Analysis':
 
 if selected == "Conclusion":
     st.title('Conclusion')
-    
-   
- 
+    col11,col12= st.columns([0.01,5])
 
+    fig10=px.sunburst(insurance_data,path=['INSURANCE_TYPE','SOCIAL_CLASS','CLAIM_STATUS'],values='CLAIM_AMOUNT')
+    
+    
+    col12.plotly_chart(fig10)
+   
+    ######
+    
+    col13,col14=st.columns([0.01,1])
+    fig11=px.sunburst(insurance_data, path=['INSURANCE_TYPE','INCIDENT_SEVERITY','INCIDENT_STATE','ANY_INJURY','EMPLOYMENT_STATUS','CLAIM_STATUS'],values='CLAIM_AMOUNT', branchvalues = 'total', maxdepth = 2)
+    
+    col14.plotly_chart(fig11)
+    ######
+    
+    col15,col16 = st.columns([1,5])
+    fig12=px.histogram(insurance_data, x='CLAIM_AMOUNT', color= 'INCIDENT_SEVERITY', barmode= 'group',nbins= 10)
+   
+    col16.plotly_chart(fig12)
    
 if selected == 'Bibliography':
    st.title('Bibliography')
