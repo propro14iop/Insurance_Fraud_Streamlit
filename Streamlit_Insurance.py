@@ -17,7 +17,7 @@ st.set_page_config(layout="wide")
 
 
 
-mypath = ''
+mypath = '/Users/edwardkaiweihuang/Desktop/DataScience/Insurance Fraud Detection/'
 insurance_data = pd.read_csv(mypath+'insurance_data.csv')
 vendor_data = pd.read_csv(mypath+'vendor_data.csv')
 employee_data = pd.read_csv(mypath+'employee_data.csv')
@@ -65,9 +65,10 @@ if selected=='Background Information':
     
 if selected=='Data Cleaning':
    st.title('Data Cleaning')
-      
-      
-      
+   st.markdown('Data cleaning is one of the most important steps in the data analysis process. Data cleaning is the process of removing or transforming inconsistent, incomplete, or erroneous data from a dataset to make it suitable for further analysis. It can involve a variety of techniques, including data imputation, data deletion, data conversion, and data normalization.')
+   st.markdown('Pandas and Numpy are two of the most popular Python libraries for working with data. Pandas is an open source Python library that provides easy-to-use data structures and data analysis tools. Numpy is a powerful library for scientific computing with Python that provides a number of powerful functions for working with arrays and matrices.')   
+   st.markdown('Using these two libraries, data cleaning primarily focuses on dealing with missing values, incorrect values, and outliers. With Pandas, one can easily identify missing values and replace them with a suitable value. The fillna() function can be used to fill missing values with the most frequently used values in the data set. Similarly, incorrect values can be identified and replaced with the correct value, either by using the replace() function or by applying a transformation such as log transformation for normalizing the data.')
+   
       
    
 if selected=='Exploratory Analysis':
@@ -153,7 +154,7 @@ if selected=='Exploratory Analysis':
 if selected=='Data Analysis':
    st.title('Data Analysis')   
    col9,col10=st.columns([2,4])
-   col9.markdown('This graph is interesting because it shows that there is no difference between renting and having a mortgage. This is pretty interesting because logically speaking, the more wealthier people would')
+   col9.markdown('This graph is interesting because it shows that there is no difference between renting and having a mortgage. This is pretty interesting because logically speaking, wealthier people would be less likely to be an insurance fraud while more poverished people would be portraayed more as frauds. This is because the more wealthier people normally would not need to use such vulgar ways of earning money.')
    fig6= px.box(insurance_data,x ='CLAIM_AMOUNT', y= 'HOUSE_TYPE' ,color= 'INSURANCE_TYPE' )
    col10.plotly_chart(fig6)   
 
@@ -161,21 +162,22 @@ if selected=='Data Analysis':
 
 if selected == "Conclusion":
     st.title('Conclusion')
+    st.markdown('### Sunburst Graph #1')
     col11,col12= st.columns([0.01,5])
 
     fig10=px.sunburst(insurance_data,path=['INSURANCE_TYPE','SOCIAL_CLASS','CLAIM_STATUS'],values='CLAIM_AMOUNT',maxdepth =2)
     
-    
+
     col12.plotly_chart(fig10)
    
     ######
-    
+    st.markdown('### Sunburst Graph #2') 
     col13,col14=st.columns([0.01,1])
     fig11=px.sunburst(insurance_data, path=['INSURANCE_TYPE','INCIDENT_SEVERITY','INCIDENT_STATE','ANY_INJURY','EMPLOYMENT_STATUS','CLAIM_STATUS'],values='CLAIM_AMOUNT', branchvalues = 'total', maxdepth = 2)
-    
+   
     col14.plotly_chart(fig11)
     ######
-    
+    st.markdown('### Correlation Plots and Logistic Regressions')
     col15,col16 = st.columns([1,5])
     fig12=px.histogram(insurance_data, x='CLAIM_AMOUNT', color= 'INCIDENT_SEVERITY', barmode= 'group',nbins= 10)
    
