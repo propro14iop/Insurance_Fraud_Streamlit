@@ -17,7 +17,7 @@ st.set_page_config(layout="wide")
 
 
 
-mypath = ''
+mypath = '/Users/edwardkaiweihuang/Desktop/DataScience/Insurance Fraud Detection/'
 insurance_data = pd.read_csv(mypath+'insurance_data.csv')
 vendor_data = pd.read_csv(mypath+'vendor_data.csv')
 employee_data = pd.read_csv(mypath+'employee_data.csv')
@@ -163,7 +163,7 @@ if selected == "Conclusion":
     st.title('Conclusion')
     col11,col12= st.columns([0.01,5])
 
-    fig10=px.sunburst(insurance_data,path=['INSURANCE_TYPE','SOCIAL_CLASS','CLAIM_STATUS'],values='CLAIM_AMOUNT')
+    fig10=px.sunburst(insurance_data,path=['INSURANCE_TYPE','SOCIAL_CLASS','CLAIM_STATUS'],values='CLAIM_AMOUNT',maxdepth =2)
     
     
     col12.plotly_chart(fig10)
