@@ -17,7 +17,7 @@ st.set_page_config(layout="wide")
 
 
 
-mypath = ''
+mypath = '/Users/edwardkaiweihuang/Desktop/DataScience/Insurance Fraud Detection/'
 insurance_data = pd.read_csv(mypath+'insurance_data.csv')
 vendor_data = pd.read_csv(mypath+'vendor_data.csv')
 employee_data = pd.read_csv(mypath+'employee_data.csv')
@@ -66,6 +66,7 @@ if selected=='Background Information':
 if selected=='Data Cleaning':
    st.title('Data Cleaning')
    st.markdown('Data cleaning is one of the most important steps in the data analysis process. Data cleaning is the process of removing or transforming inconsistent, incomplete, or erroneous data from a dataset to make it suitable for further analysis. It can involve a variety of techniques, including data imputation, data deletion, data conversion, and data normalization.')
+   
    st.markdown('Pandas and Numpy are two of the most popular Python libraries for working with data. Pandas is an open source Python library that provides easy-to-use data structures and data analysis tools. Numpy is a powerful library for scientific computing with Python that provides a number of powerful functions for working with arrays and matrices.')   
    st.markdown('Using these two libraries, data cleaning primarily focuses on dealing with missing values, incorrect values, and outliers. With Pandas, one can easily identify missing values and replace them with a suitable value. The fillna() function can be used to fill missing values with the most frequently used values in the data set. Similarly, incorrect values can be identified and replaced with the correct value, either by using the replace() function or by applying a transformation such as log transformation for normalizing the data.')
    
@@ -74,7 +75,7 @@ if selected=='Data Cleaning':
 if selected=='Exploratory Analysis':
    st.title('Exploratory Analysis')    
    col1,col2=st.columns([3,5])
-   st.markdown('### Interactive Histogram')
+   col1.markdown('### Interactive Histogram')
    col1.markdown("Select numeric variables to display on histogram and choose a category column for a color.")
    with st.form("Numeric histograms"):
        x_option=col1.selectbox('Select a numeric column for the x axis',numeric_cols,key=1)
@@ -98,12 +99,12 @@ if selected=='Exploratory Analysis':
       #everytime new graph - new name and follow format  
       
    col3,col4=st.columns([3,5])
-   st.markdown('### Interactive Scatter Plot')
+   col3.markdown('### Interactive Scatter Plot')
    col3.markdown("Select numeric variables to display on scatter and choose a category column for a color.")
             
    with st.form("Numeric Scatter plot"):
           x_option1=col3.selectbox('Select a numeric column for the x axis',numeric_cols,key=4)
-          y_option1=col4.selectbox('Select a numeric column for the y axis',numeric_cols,key=5)
+          y_option1=col3.selectbox('Select a numeric column for the y axis',numeric_cols,key=5)
           color_option1= col3.selectbox('Select a category variable for the color. ',cat_cols,key=6)
 
 
@@ -116,72 +117,88 @@ if selected=='Exploratory Analysis':
 
 
    col5,col6=st.columns([3,5])
-   st.markdown('### Interactive Pie-chart')
+   col5.markdown('### Interactive Pie-chart')
    col5.markdown("Select numeric variables to display on pie and choose a category column for a color.")
             
    with st.form("Pie Chart"):
        
           
-          x_option2=col5.selectbox('Select a numeric column for the x axis',numeric_cols,key=7)
-          y_option2=col5.selectbox('Select a numeric column for the y axis',cat_cols,key=8)
+          x_option2=col5.selectbox('Select a numeric column for the values. ',numeric_cols,key=7)
+          
           color_option2= col5.selectbox('Select a category variable for the color. ',cat_cols,key=9)
 
 
               
           submitted3=st.form_submit_button("Submit to view Pie-plot")
           if submitted3:
-              fig3= px.pie(insurance_data, values =x_option2, names= y_option2 ,color= color_option2,hole=0.2 )
+              fig3= px.pie(insurance_data, values =x_option2, names= color_option2 ,color= color_option2,hole=0.2 )
               col6.plotly_chart(fig3)               
               
               
               
    col7,col8=st.columns([3,5])
-   st.markdown('### Interactive Boxplot')
+   col7.markdown('### Interactive Boxplot')
    col7.markdown("Select numeric variables to display on box and choose a category column for a color.")    
    with st.form("Boxplot"):
           
           x_option3=col7.selectbox('Select a numeric column for the x axis',numeric_cols,key=10)
-          y_option3=col7.selectbox('Select a numeric column for the y axis',cat_cols,key=11)
-          color_option3= col7.selectbox('Select a category variable for the color. ',cat_cols,key=12)
-
+          y_option3=col7.selectbox('Select a categorical column for the y axis',cat_cols,key=11)
+          log = col7.checkbox('Check if you want a log scale.')
+ 
+           
 
               
           submitted4=st.form_submit_button("Submit to view boxplot")
           if submitted4:
-              fig4= px.box(insurance_data,x =x_option3, y= y_option3 ,color= color_option3 )
+              fig4= px.box(insurance_data,x =x_option3, y= y_option3 ,color= y_option3 , log_x= log)
               col8.plotly_chart(fig4)      
+ 
+        
+   st.markdown('### Interactive Sunburst') 
+   col13,col14=st.columns([2,5])
+   
+   with st.form('Sunburst'):
+       
+       path_opt = col13.multiselect('Select up to 2 variables to be included inside the suburst', options=cat_cols,key=13, max_selections=2)
+       submitted5 = st.form_submit_button("Submit to view Sunburst")
+       if submitted5:
+           
+           fig11=px.sunburst(insurance_data, path=path_opt,values='CLAIM_AMOUNT', branchvalues = 'total', maxdepth = 2)
+   
+           col14.plotly_chart(fig11)
     
+ 
+    
+ 
 if selected=='Data Analysis':
    st.title('Data Analysis')   
-   col9,col10=st.columns([2,4])
+   col9,col10=st.columns([3,5])
    col9.markdown('This graph is interesting because it shows that there is no difference between renting and having a mortgage. This is pretty interesting because logically speaking, wealthier people would be less likely to be an insurance fraud while more poverished people would be portraayed more as frauds. This is because the more wealthier people normally would not need to use such vulgar ways of earning money.')
    fig6= px.box(insurance_data,x ='CLAIM_AMOUNT', y= 'HOUSE_TYPE' ,color= 'INSURANCE_TYPE' )
    col10.plotly_chart(fig6)   
 
-            
+
+
+    ######
+
+   ######
+   st.markdown('### Claim Amount by Incident Severity')
+   col15,col16 = st.columns([1,5])
+   fig12=px.histogram(insurance_data, x='CLAIM_AMOUNT', color= 'INCIDENT_SEVERITY', barmode= 'group',nbins= 10)
+   
+   
+   
+   col16.plotly_chart(fig12)
+   
+   col19,col20 = st.columns([3,5])
+   col19.markdown('### Temp markdown Histogram')
+   col19.markdown('In this graph, it is shown that younger people (aged around 27~37) would more likely target health insurance companies for fraud. However, health insurance frauds starts to slowly decrease in count as the age of fraudsters increases.')
+   fig12 = px.histogram(insurance_data, x='AGE', color= 'INSURANCE_TYPE', barmode= 'group',nbins= 10) 
+   col20.plotly_chart(fig12)
 
 if selected == "Conclusion":
     st.title('Conclusion')
-    st.markdown('### Sunburst Graph #1')
-    col11,col12= st.columns([0.01,5])
 
-    fig10=px.sunburst(insurance_data,path=['INSURANCE_TYPE','SOCIAL_CLASS','CLAIM_STATUS'],values='CLAIM_AMOUNT',maxdepth =2)
-    
-
-    col12.plotly_chart(fig10)
-   
-    ######
-    st.markdown('### Sunburst Graph #2') 
-    col13,col14=st.columns([0.01,1])
-    fig11=px.sunburst(insurance_data, path=['INSURANCE_TYPE','INCIDENT_SEVERITY','INCIDENT_STATE','ANY_INJURY','EMPLOYMENT_STATUS','CLAIM_STATUS'],values='CLAIM_AMOUNT', branchvalues = 'total', maxdepth = 2)
-   
-    col14.plotly_chart(fig11)
-    ######
-    st.markdown('### Correlation Plots and Logistic Regressions')
-    col15,col16 = st.columns([1,5])
-    fig12=px.histogram(insurance_data, x='CLAIM_AMOUNT', color= 'INCIDENT_SEVERITY', barmode= 'group',nbins= 10)
-   
-    col16.plotly_chart(fig12)
    
 if selected == 'Bibliography':
    st.title('Bibliography')
