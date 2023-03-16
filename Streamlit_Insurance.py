@@ -17,17 +17,23 @@ st.set_page_config(layout="wide")
 
 
 
-mypath = ''
+
+mypath = '/Users/edwardkaiweihuang/Desktop/DataScience/Insurance Fraud Detection/'
 insurance_data = pd.read_csv(mypath+'insurance_data.csv')
 vendor_data = pd.read_csv(mypath+'vendor_data.csv')
 employee_data = pd.read_csv(mypath+'employee_data.csv')
 
-numeric_cols = ['CLAIM_AMOUNT','PREMIUM_AMOUNT','TENURE','AGE','']  #add list of all num and cat cols here
+numeric_cols = ['CLAIM_AMOUNT','PREMIUM_AMOUNT','TENURE','AGE']  #add list of all num and cat cols here
 cat_cols = ['INSURANCE_TYPE','STATE','MARITAL_STATUS','EMPLOYMENT_STATUS','RISK_SEGMENTATION','HOUSE_TYPE','SOCIAL_CLASS','CUSTOMER_EDUCATION_LEVEL','CLAIM_STATUS','INCIDENT_SEVERITY','AUTHORITY_CONTACTED','ANY_INJURY', 'POLICE_REPORT_AVAILABLE','INCIDENT_STATE','INCIDENT_HOUR_OF_THE_DAY']
 
 
 
 insurance_data['ANY_INJURY'] = pd.Categorical(insurance_data['ANY_INJURY'],categories=[0,1])
+
+insurance_data['INCIDENT_HOUR_OF_THE_DAY'] = pd.Categorical(insurance_data['INCIDENT_HOUR_OF_THE_DAY'],categories=np.arange(24))
+
+insurance_data['POLICE_REPORT_AVAILABLE'] = pd.Categorical(insurance_data['POLICE_REPORT_AVAILABLE'],categories=[0,1])
+insurance_data['CUSTOMER_EDUCATION_LEVEL'] = insurance_data['CUSTOMER_EDUCATION_LEVEL'].replace({np.nan:'Unknown'})
 
 with st.sidebar: 
 	selected = option_menu(
@@ -173,6 +179,7 @@ if selected=='Exploratory Analysis':
 if selected=='Data Analysis':
    st.title('Data Analysis')   
    col9,col10=st.columns([3,5])
+   col9.markdown('Keep in mind that all of the data present are all fraud cases and some of the variables inside the dataset may not at all have any relationship with determining a fraudster.')
    col9.markdown('This graph is interesting because it shows that there is no difference between renting and having a mortgage. This is pretty interesting because logically speaking, wealthier people would be less likely to be an insurance fraud while more poverished people would be portraayed more as frauds. This is because the more wealthier people normally would not need to use such vulgar ways of earning money.')
    fig6= px.box(insurance_data,x ='CLAIM_AMOUNT', y= 'HOUSE_TYPE' ,color= 'INSURANCE_TYPE' )
    col10.plotly_chart(fig6)   
