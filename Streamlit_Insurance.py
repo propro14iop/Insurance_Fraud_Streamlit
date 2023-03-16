@@ -18,7 +18,7 @@ st.set_page_config(layout="wide")
 
 
 
-mypath = '/Users/edwardkaiweihuang/Desktop/DataScience/Insurance Fraud Detection/'
+mypath = ''
 insurance_data = pd.read_csv(mypath+'insurance_data.csv')
 vendor_data = pd.read_csv(mypath+'vendor_data.csv')
 employee_data = pd.read_csv(mypath+'employee_data.csv')
