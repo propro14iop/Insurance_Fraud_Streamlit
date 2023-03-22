@@ -18,7 +18,7 @@ st.set_page_config(layout="wide")
 
 
 
-mypath = ''
+mypath = '/Users/edwardkaiweihuang/Desktop/DataScience/Insurance Fraud Detection/'
 insurance_data = pd.read_csv(mypath+'insurance_data.csv')
 vendor_data = pd.read_csv(mypath+'vendor_data.csv')
 employee_data = pd.read_csv(mypath+'employee_data.csv')
@@ -64,9 +64,8 @@ if selected=='Background Information':
     st.markdown('Insurance fraud is mostly driven by four factors: greed, retaliation, necessity, and enjoyment, according to the Coalition Against Insurance Fraud. In order to obtain money or other things, those who are motivated by greed will commit fraud. When someone decides to pursue vengeance because they believe an insurer has harmed them, revenge is a possible motivation. When someone is in need and chooses to conduct fraud in order to get money, need is a factor. The excitement of committing insurance fraud is a driving force behind organized criminal networks.')
     st.markdown('The dataset that I will use and analyze consists of ten thousand cases of insurance fraud. In each case, 38 contributing factors will be provided in the dataset to help us gain more understanding on what is going on in each insurance fraud case. These variables includes the claim amount made by the fraud, marital status, house type, employment status, tenure, age and etc. ')
     
-    
-    
-    
+    st.markdown('Here is what the data looks like (the warning signs are indicators for numeric data treated as categories):')
+    st.dataframe(insurance_data)
     
     
 if selected=='Data Cleaning':
@@ -165,11 +164,12 @@ if selected=='Exploratory Analysis':
    
    with st.form('Sunburst'):
        
-       path_opt = col13.multiselect('Select up to 2 variables to be included inside the suburst', options=cat_cols,key=13, max_selections=2)
+       path_opt = col13.multiselect('Select up to 2 variables to be included inside the suburst, first selection is the inner circle.', options=cat_cols,key=13, max_selections=2)
+       value_opt = col13.selectbox('Select a numeric column for the values', numeric_cols)
        submitted5 = st.form_submit_button("Submit to view Sunburst")
        if submitted5:
            
-           fig11=px.sunburst(insurance_data, path=path_opt,values='CLAIM_AMOUNT', branchvalues = 'total', maxdepth = 2)
+           fig11=px.sunburst(insurance_data, path=path_opt,values=value_opt, branchvalues = 'total', maxdepth = 2)
    
            col14.plotly_chart(fig11)
     
@@ -195,21 +195,33 @@ if selected=='Data Analysis':
    
    
    
+   
    col16.plotly_chart(fig12)
    
    col19,col20 = st.columns([3,5])
    col19.markdown('### Temp markdown Histogram')
-   col19.markdown('In this graph, it is shown that younger people (aged around 27~37) would more likely target health insurance companies for fraud. However, health insurance frauds starts to slowly decrease in count as the age of fraudsters increases.')
+   col19.markdown('In this graph, it is shown that younger people (aged around 27~37) would more likely target health insurance companies for fraud. However, health insurance frauds starts to slowly decrease in count as the age of fraudsters increases. S')
    fig12 = px.histogram(insurance_data, x='AGE', color= 'INSURANCE_TYPE', barmode= 'group',nbins= 10) 
    col20.plotly_chart(fig12)
 
 if selected == "Conclusion":
     st.title('Conclusion')
-
+    st.markdown('Insurance fraud is a significant problem in the insurance industry, and identifying the variables that may have a correlation to insurance fraudsters can help insurance companies better detect and prevent fraud. Some of the variables that may have a correlation to insurance fraudsters include:')
+    st.markdown('Age: Studies have shown that younger people are more likely to commit insurance fraud than older individuals. This may be due to a lack of financial stability or a greater propensity for risk-taking behavior.')
+    st.markdown('Occupation: Certain occupations are more likely to commit insurance fraud, such as those in the medical field, where billing fraud is a prevalent issue.')
+    st.markdown('Financial distress: People who are experiencing financial distress may be more likely to commit insurance fraud in an attempt to improve their financial situation.')
+    
+    st.markdown('Criminal history: Individuals with a criminal history may be more likely to commit insurance fraud as they may have a higher tolerance for risk and be less concerned about the legal consequences of their actions.')
+    st.markdown('Previous insurance claims: People who have a history of making excessive or fraudulent insurance claims may be more likely to continue this behavior in the future.')
+    st.markdown('Lifestyle factors: Certain lifestyle factors, such as drug or alcohol addiction, may be associated with an increased risk of insurance fraud.')
+    st.markdown('Geographic location: Certain geographic locations may be associated with a higher risk of insurance fraud due to factors such as the prevalence of organized crime or a lack of regulation in the insurance industry.')
+    st.markdown('It is important to note that these variables do not necessarily mean that someone is committing insurance fraud. They are merely factors that may have a correlation to insurance fraudsters and can be used as part of a broader strategy to detect and prevent fraud in the insurance industry.')
    
 if selected == 'Bibliography':
    st.title('Bibliography')
-   
+   st.markdown('https://content.naic.org/cipr-topics/insurance-fraud')
+   st.markdown("https://www.fbi.gov/stats-services/publications/insurance-fraud")
+   st.markdown('http://www.insurance.ca.gov/0300-fraud/0100-fraud-division-overview/05-ins-fraud/')
     
 
 
