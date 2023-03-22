@@ -207,14 +207,9 @@ if selected=='Data Analysis':
 if selected == "Conclusion":
     st.title('Conclusion')
     st.markdown('Insurance fraud is a significant problem in the insurance industry, and identifying the variables that may have a correlation to insurance fraudsters can help insurance companies better detect and prevent fraud. Some of the variables that may have a correlation to insurance fraudsters include:')
-    st.markdown('Age: Studies have shown that younger people are more likely to commit insurance fraud than older individuals. This may be due to a lack of financial stability or a greater propensity for risk-taking behavior.')
-    st.markdown('Occupation: Certain occupations are more likely to commit insurance fraud, such as those in the medical field, where billing fraud is a prevalent issue.')
-    st.markdown('Financial distress: People who are experiencing financial distress may be more likely to commit insurance fraud in an attempt to improve their financial situation.')
-    
-    st.markdown('Criminal history: Individuals with a criminal history may be more likely to commit insurance fraud as they may have a higher tolerance for risk and be less concerned about the legal consequences of their actions.')
-    st.markdown('Previous insurance claims: People who have a history of making excessive or fraudulent insurance claims may be more likely to continue this behavior in the future.')
-    st.markdown('Lifestyle factors: Certain lifestyle factors, such as drug or alcohol addiction, may be associated with an increased risk of insurance fraud.')
-    st.markdown('Geographic location: Certain geographic locations may be associated with a higher risk of insurance fraud due to factors such as the prevalence of organized crime or a lack of regulation in the insurance industry.')
+    st.markdown('Age: This case study have shown that younger people are more likely to commit insurance fraud than older individuals. But as seen in this case study, most of the fraudsters have a bachelor degree, which may indicate they are older. This may be because with a bachelor degree, people would think they are older and more mature, which makes fraudsters easier to get approval for insurances')
+    st.markdown('Financial distress: People who are experiencing financial distress may be more likely to commit insurance fraud in an attempt to improve their financial situation. This is seen by the relationship between the categorization of a fraudsters social class and it seems that more frauds are comitted in the middle classes and lower classes compared to that of the high class')
+   
     st.markdown('It is important to note that these variables do not necessarily mean that someone is committing insurance fraud. They are merely factors that may have a correlation to insurance fraudsters and can be used as part of a broader strategy to detect and prevent fraud in the insurance industry.')
    
 if selected == 'Bibliography':
