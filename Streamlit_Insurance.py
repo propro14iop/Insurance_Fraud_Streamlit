@@ -233,7 +233,7 @@ if selected == "Conclusion":
     
     #
     
-    st.markdown('Financial distress: People who are experiencing financial distress may be more likely to commit insurance fraud in an attempt to improve their financial situation. This is seen by the relationship between the categorization of a fraudsters social class and it seems that more frauds are comitted in the middle classes and lower classes compared to that of the high class')
+    st.markdown('Financial distress: People who are in the middle and lower income classes may have a higher chance of becoming a fraudster than high income civilians. But keep in mind that there is only a slight difference between the three social classes in the distribution of the dataset which makes this a really small factor to put into consideration')
    
     st.markdown('It is important to note that these variables do not necessarily mean that someone is committing insurance fraud. They are merely factors that may have a correlation to insurance fraudsters and can be used as part of a broader strategy to detect and prevent fraud in the insurance industry.')
    
