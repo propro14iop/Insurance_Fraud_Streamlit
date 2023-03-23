@@ -192,7 +192,7 @@ if selected=='Data Analysis':
    st.markdown('### Claim Amount by Incident Severity')
    col15,col16 = st.columns([1,5])
    fig12=px.histogram(insurance_data, x='CLAIM_AMOUNT', color= 'INCIDENT_SEVERITY', barmode= 'group',nbins= 10)
-   
+   col15.markdown('This shows that fraudsters are more likely to ask for a lower claim amount to avoid any suspicion of fraud. This is seen in the graph as most of the frauds are made in the claim amounts that is ranged between 0~9000 dollars. Keep in mind that all of the datapoints given are fraudulent cases, so there is a correlation between claim amount and if someone is likely to be fraud.')
    
    
    
@@ -200,14 +200,39 @@ if selected=='Data Analysis':
    
    col19,col20 = st.columns([3,5])
    col19.markdown('### Temp markdown Histogram')
-   col19.markdown('In this graph, it is shown that younger people (aged around 27~37) would more likely target health insurance companies for fraud. However, health insurance frauds starts to slowly decrease in count as the age of fraudsters increases. S')
+   col19.markdown('In this graph, it is shown that younger people (aged around 27~37) would more likely target health insurance companies for fraud. However, health insurance frauds starts to slowly decrease in count as the age of fraudsters increases. Mobile rises at the age of 40-50 because family sizes as increases, the familyy may need more mobile plans, so they would more likely commit mobile fraud as seen on the graph. Travel frauds increase in people aged 50-55, this may be because at that stage, people are already planning on retiring, and thinking that they could get more money from scamming the fraud companies for their retirement. And for older and retired people, property fraud are commited more often. This may be because people would most likely own a house at that point in life and want to get more money, thus committing fraud. ')
    fig12 = px.histogram(insurance_data, x='AGE', color= 'INSURANCE_TYPE', barmode= 'group',nbins= 10) 
    col20.plotly_chart(fig12)
 
 if selected == "Conclusion":
     st.title('Conclusion')
     st.markdown('Insurance fraud is a significant problem in the insurance industry, and identifying the variables that may have a correlation to insurance fraudsters can help insurance companies better detect and prevent fraud. Some of the variables that may have a correlation to insurance fraudsters include:')
-    st.markdown('Age: This case study have shown that younger people are more likely to commit insurance fraud than older individuals. But as seen in this case study, most of the fraudsters have a bachelor degree, which may indicate they are older. This may be because with a bachelor degree, people would think they are older and more mature, which makes fraudsters easier to get approval for insurances')
+    st.markdown('Age: This case study have shown that younger people are more likely to commit insurance fraud than older individuals. But as seen in this case study, most of the fraudsters have a bachelor degree, which may indicate they are older. This may be because with a bachelor degree, people would think they are older and more mature, which makes fraudsters easier to get approval for insurances. ')
+    
+    ## think bach are smart enough to think how get fraud but not too smart at getting away (since this case study is all fraud)
+    
+    # add soc class graph to data analysis with mean instead of sum claim amt
+    
+    #make interactive graph with cat variable and num variable
+    
+    #hardcode boxplot for x = claim amt y= soc class
+    
+    # change language into slight and etc. change so lower income fraudsters may claim more on avg than mi and hi people
+    
+    #fraudsters tend to make lower claim amounts to avoid any suspicion of getting caught
+    
+    # the total, minor major losses have really less differences and have roughly equal amount of ppl in each cat of incident severity
+    
+    #mobile at 45-50 becuz family size increase and kids will use cell-phone etc .
+    
+    # travel becuz they are near retirement age and think they might get some more money from insurance fraud
+    
+    #for retired ppl, property fraud has most counts, this is becuz ppl most likely would own a home so it makes sense most ppl in that age group would commit property fraud
+    
+    
+    
+    #
+    
     st.markdown('Financial distress: People who are experiencing financial distress may be more likely to commit insurance fraud in an attempt to improve their financial situation. This is seen by the relationship between the categorization of a fraudsters social class and it seems that more frauds are comitted in the middle classes and lower classes compared to that of the high class')
    
     st.markdown('It is important to note that these variables do not necessarily mean that someone is committing insurance fraud. They are merely factors that may have a correlation to insurance fraudsters and can be used as part of a broader strategy to detect and prevent fraud in the insurance industry.')
