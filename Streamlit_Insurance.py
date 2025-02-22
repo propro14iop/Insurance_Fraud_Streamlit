@@ -5,7 +5,7 @@ Created on Sat Mar  4 10:41:17 2023k
 
 @author: edwardkaiweihuang
 """
-
+pip install streamlit
 import pandas as pd
 import numpy as np
 import plotly.express as px
